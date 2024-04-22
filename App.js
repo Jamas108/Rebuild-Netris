@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { PaperProvider, configureFonts } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
+import { NativeBaseProvider} from "native-base";
 import { StyleSheet, Text, View, LogBox } from "react-native";
 import {
   SplashScreen,
@@ -12,6 +13,7 @@ import {
   Nerby,
   Home,
   ProfileScreen,
+  Splash,
 } from "./screens";
 import {
   Inter_400Regular,
@@ -31,7 +33,7 @@ LogBox.ignoreAllLogs();
 const TabList = () => {
   return (
     <Tab.Navigator
-      initialRouteName={"Home"}
+      initialRouteName={"Splash"}
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
@@ -152,19 +154,22 @@ export default function App() {
     Inter_700Bold,
   });
   return fontsLoaded ? (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name={"Splash"} component={SplashScreen} />
-        <Stack.Screen name={"Login"} component={Login} />
-        {/* <Stack.Screen name={"Home"} component={Home} /> */}
-        <Stack.Screen name={"Register"} component={Register} />
-        {/* <Stack.Screen name={"Nerby"} component={Nerby} /> */}
-        <Stack.Screen name={"HomeTab"} component={TabList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name={"SplashScreen"} component={SplashScreen} />
+          <Stack.Screen name={"Splash"} component={Splash} />
+          <Stack.Screen name={"Login"} component={Login} />
+          {/* <Stack.Screen name={"Home"} component={Home} /> */}
+          <Stack.Screen name={"Register"} component={Register} />
+          {/* <Stack.Screen name={"Nerby"} component={Nerby} /> */}
+          <Stack.Screen name={"HomeTab"} component={TabList} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   ) : (
     <AppLoading />
   );
