@@ -1,41 +1,24 @@
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Platform,
-  FlatList,
-} from "react-native";
-import { TextInput } from "react-native-paper";
-import {
-  Separator,
-  AuthTextInput,
-  PwdInput,
-  Profile,
-} from "../components";
-import React, { useRef, useState, useEffect } from "react";
-import Carousel, { ParallaxImage } from "react-native-snap-carousel";
-import MapView, { Marker } from "react-native-maps";
-import * as Location from "expo-location";
-import FIREBASE from '../config/FIREBASE';
+import React, { useState, useEffect } from "react";
+import { Dimensions, Platform, Pressable } from "react-native";
 import { getData } from '../utils/localStorage';
-import { Heading, Text, Box, Button, HStack, Center, Image } from "native-base";
-
+import { Heading, Text, Box, HStack, Image, VStack } from "native-base";
 
 const Home = ({ navigation }) => {
   const [profile, setProfile] = useState(null);
 
-  const getUserData = () => {
-    getData("user").then((res) => {
-      const data = res;
-      if (data) {
-        console.log("isi data", data);
-        setProfile(data);
-      }
-    });
-  };
-
   useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const data = await getData("user");
+        if (data) {
+          console.log("isi data", data);
+          setProfile(data);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
     const unsubscribe = navigation.addListener("focus", () => {
       getUserData();
     });
@@ -45,31 +28,55 @@ const Home = ({ navigation }) => {
     };
   }, [navigation]);
 
+  const navigateToCategory = (category) => {
+    // Implementasi navigasi ke halaman yang sesuai berdasarkan kategori di sini
+    // Contoh:
+    // navigation.navigate("Category", { category });
+  };
+
   return (
     <>
-      <Box bg={"#774494"}>
-        <Heading ml={4} mt={3} color={"white"}>Selamat Datang!</Heading>
-        <Text fontSize={20} ml={4} color={"white"}>{profile?.name}</Text>
+      <Box bg={"#774494"} p={4}>
+        <Heading color={"white"}>Selamat Datang!</Heading>
+        <Text fontSize={20} color={"white"}>{profile?.name}</Text>
       </Box>
-      <Box>
+      <Box flex={1} p={4}>
         <Heading alignSelf={"center"} mt={10}>PILIH KATEGORI</Heading>
-        <HStack alignSelf={"center"} mt={20}>
-          <Button h={40} w={40} mr={8} bg={"transparent"} borderColor={"#774494"} borderWidth={2}>
-            <Image
-              source={require("../assets/icon.png")}
-              w="80%"
-              h="40%"
-              alt="Fisheesh Logo"
-              alignSelf={"center"}
-              mt={0}
-            />
-          </Button>
-          <Button w={40} bg={"transparent"} borderColor={"#774494"} borderWidth={2}></Button>
+        <HStack alignSelf={"center"} mt={10} space={4}>
+          <Pressable onPress={() => navigateToCategory("resmi")}>
+            {({ pressed }) => (
+              <VStack alignItems="center">
+                <Image
+                  source={require("../assets/resmi.png")}
+                  alt="Fisheesh Logo"
+                  w={170}
+                  h={120}
+                  borderColor={pressed ? "gray.500" : "black"}
+                  borderWidth={2}
+                />
+                <Text mt={2}>Kategori Resmi</Text>
+              </VStack>
+            )}
+          </Pressable>
+          <Pressable onPress={() => navigateToCategory("nonresmi")}>
+            {({ pressed }) => (
+              <VStack alignItems="center">
+                <Image
+                  source={require("../assets/nonresmi.jpg")}
+                  alt="Fishe"
+                  w={170}
+                  h={120}
+                  borderColor={pressed ? "gray.500" : "black"}
+                  borderWidth={2}
+                />
+                <Text mt={2}>Kategori Non-Resmi</Text>
+              </VStack>
+            )}
+          </Pressable>
         </HStack>
       </Box>
     </>
-  )
-
+  );
 }
 
 export default Home;

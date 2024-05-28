@@ -1,7 +1,6 @@
-
 import { Alert } from "react-native";
 import FIREBASE from "../config/FIREBASE";
-import { clearStorage, getData, storeData } from "../utils/localStorage";
+import { clearStorage, storeData, getData } from "../utils/localStorage";
 
 export const registerUser = async (data, password) => {
   try {
@@ -15,7 +14,8 @@ export const registerUser = async (data, password) => {
     await FIREBASE.database()
       .ref("users/" + success.user.uid)
       .set(dataBaru);
-    //Local storage(Async Storage)
+
+    // Local storage (Async Storage)
     storeData("user", dataBaru);
     return dataBaru;
   } catch (error) {
@@ -23,18 +23,20 @@ export const registerUser = async (data, password) => {
   }
 };
 
-
 export const loginUser = async (email, password) => {
   try {
     const success = await FIREBASE.auth().signInWithEmailAndPassword(email, password);
-    const resDB = await FIREBASE.database()
-      .ref("/users/" + success.user.uid)
-      .once("value");
+    
+    // Retrieve user data from the database
+    const userRef = FIREBASE.database().ref(`/users/${success.user.uid}`);
+    const userSnapshot = await userRef.once("value");
+    const userData = userSnapshot.val();
 
-    if (resDB.val()) {
+    if (userData) {
       // Local storage (Async Storage)
-      await storeData("user", resDB.val());
-      return resDB.val();
+      await storeData("user", userData);
+      
+      return userData;
     } else {
       throw new Error("User data not found");
     }
@@ -43,7 +45,7 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// UNTUK LOG OUT
+
 export const logoutUser = () => {
   FIREBASE.auth()
     .signOut()
@@ -53,41 +55,103 @@ export const logoutUser = () => {
     })
     .catch((error) => {
       // An error happened.
-      alert(error);
+      Alert.alert("Error", error.message);
     });
 };
 
 
-// UNTUK EDIT PROFILE
-export  const editProfile = async  (profile, navigation) => {
+export const updateUserData = async (uid, updatedData) => {
   try {
-    const user = FIREBASE.auth().currentUser;
+    const userRef = FIREBASE.database().ref(`users/${uid}`);
+    const snapshot = await userRef.once("value");
+    const existingUserData = snapshot.val();
 
-    // Update user profile in Firebase
-    await user.updateProfile({
-      displayName: profile.name,
-    });
+    if (existingUserData) {
+      const updatedUser = {
+        ...existingUserData,
+        ...updatedData,
+      };
 
-    // Update user data in Firebase database
-    await FIREBASE.database()
-      .ref(`users/${user.uid}`)
-      .update({
-        name: profile.name,
-        notelephone: profile.notelephone,
-        adress: profile.adress,
-      });
-
-    // Update user data in local storage
-    const updatedUserData = {
-      ...profile,
-      name: user.displayName,
-    };
-
-    await storeData('user', updatedUserData);
-
-    // Navigate back to the Profile screen
-    navigation.goBack();
+      await userRef.update(updatedUser);
+      console.log("User data updated successfully");
+    } else {
+      console.log("User data not found");
+    }
   } catch (error) {
-    console.error('Error updating profile:', error);
+    throw error;
   }
 };
+
+// export const getObatData = () => {
+//   const obatRef = FIREBASE.database().ref("obat");
+
+//   obatRef.once("value")
+//     .then((snapshot) => {
+//       // The data is available in snapshot.val()
+//       const data = snapshot.val();
+//       console.log("Data retrieved successfully:", data);
+//       // You can update your React component state with the retrieved data here
+//     })
+//     .catch((error) => {
+//       console.error("Error retrieving data: ", error);
+//     });
+// };
+
+
+// export const addHospital = async (data) => {
+//   try {
+//     await FIREBASE.database().ref("hospitals").push(data);
+//     console.log("Hospital added successfully");
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+
+// export const getHospital = async () => {
+//   const hospitalRef = FIREBASE.database().ref("hospitals");
+
+//   return hospitalRef
+//     .once("value")
+//     .then((snapshot) => {
+//       const hospitalsData = snapshot.val();
+//       if (hospitalsData) {
+//         const hospitalsArray = Object.entries(hospitalsData).map(([hospitalId, hospitalData]) => ({
+//           hospitalId,
+//           ...hospitalData,
+//         }));
+//         return hospitalsArray;
+//       } else {
+//         return [];
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching hospitals data:", error);
+//       return [];
+//     });
+// };
+
+// export const editHospital = async (hospitalId, updatedData) => {
+//   try {
+//     await FIREBASE.database()
+//       .ref(`hospitals/${hospitalId}`)
+//       .update(updatedData);
+
+//     console.log("Hospital updated successfully");
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+// export const deleteHospital = async (hospitalId) => {
+//   try {
+//     await FIREBASE.database()
+//       .ref(`hospitals/${hospitalId}`)
+//       .remove();
+
+//     console.log("Hospital deleted successfully");
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
