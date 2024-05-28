@@ -12,7 +12,7 @@ import {
   Register,
   Nerby,
   Home,
-  ProfileScreen,
+  Profile,
   Splash,
 } from "./screens";
 import {
@@ -60,7 +60,7 @@ const TabList = () => {
                 color={color}
               />
             );
-          } else if (rn == "ProfileScreen") {
+          } else if (rn == "Profile") {
             iconName = focused ? "account" : "account-outline";
             return (
               <CustomTabIcon
@@ -113,8 +113,8 @@ const TabList = () => {
         }}
       />
       <Tab.Screen
-        name={"ProfileScreen"}
-        component={ProfileScreen}
+        name={"Profile"}
+        component={Profile}
         options={{
           tabBarShowLabel: false,
         }}
