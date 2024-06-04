@@ -15,7 +15,7 @@ import {
   Profile,
   Splash,
   EditProfile,
-  TbResmi,
+  // TbResmi,
 } from "./screens";
 import {
   Inter_400Regular,
@@ -170,7 +170,7 @@ export default function App() {
           {/* <Stack.Screen name={"Nerby"} component={Nerby} /> */}
           <Stack.Screen name={"HomeTab"} component={TabList} />
           <Stack.Screen name={"EditProfile"} component={EditProfile} />
-          <Stack.Screen name={"TbResmi"} component={TbResmi} />
+          {/* <Stack.Screen name={"TbResmi"} component={TbResmi} /> */}
 
         </Stack.Navigator>
       </NavigationContainer>
