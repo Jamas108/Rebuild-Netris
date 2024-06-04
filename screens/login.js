@@ -70,8 +70,8 @@ const Login = ({ navigation }) => {
                       <Text fontSize={"md"} color={"white"}>Password</Text>
                     </FormControl.Label>
                   </Box>
-                  <Box h={"12"} bgColor={"purple.200"} borderColor={"purple.200"} mt={0} ml={5} mr={5} borderRadius={20} shadow={"4"}>
-                    <Input borderColor={"purple.200"} h={12} mt={""} borderWidth={"2"} borderRadius={20} fontSize={"md"} placeholder="Masukan Password" bgColor={"purple.200"} value={password} onChangeText={(password) => setPassword(password)} secureTextEntry />
+                  <Box h={"12"} bgColor={"purple.200"} borderColor={"black"} mt={0} ml={5} mr={5} borderRadius={20} shadow={"4"} >
+                    <Input h={12} w={"100%"} mt={"0"} borderColor={"black"} borderWidth={"2"} borderRadius={20} fontSize={"md"} placeholder="Masukan Email" bgColor={"purple.200"} value={password} onChangeText={(password) => setPassword(password)} secureTextEntry  />
                   </Box>
                 </FormControl>
                 {formError && <Text ml={5} mt={2} color="red.500" fontSize={"sm"}>{formError}</Text>}

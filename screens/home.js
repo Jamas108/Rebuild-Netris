@@ -1,54 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions, Platform, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { getData } from '../utils/localStorage';
 import { Heading, Text, Box, HStack, Image, VStack } from "native-base";
+import FIREBASE from "../config/FIREBASE";
 
 const Home = ({ navigation }) => {
   const [profile, setProfile] = useState(null);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const data = await getData("user");
-        if (data) {
-          console.log("isi data", data);
-          setProfile(data);
+  const getUserData = async () => {
+    try {
+      const userData = await getData("user");
+      if (userData) {
+        const userRef = FIREBASE.database().ref(`users/${userData.uid}`);
+        const snapshot = await userRef.once("value");
+        const updatedUserData = snapshot.val();
+        if (updatedUserData) {
+          setProfile(updatedUserData);
+        } else {
+          console.log("User data not found");
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
-    const unsubscribe = navigation.addListener("focus", () => {
-      getUserData();
-    });
-
-    return () => {
-      unsubscribe();
-    };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", getUserData);
+    return () => unsubscribe();
   }, [navigation]);
 
   const navigateToCategory = (category) => {
-    // Implementasi navigasi ke halaman yang sesuai berdasarkan kategori di sini
-    // Contoh:
+    // Implement navigation to the category page
+    // Example:
     // navigation.navigate("Category", { category });
   };
 
   return (
     <>
-      <Box bg={"#774494"} p={4}>
-        <Heading color={"white"}>Selamat Datang!</Heading>
-        <Text fontSize={20} color={"white"}>{profile?.name}</Text>
+      <Box bg="#774494" p={4}>
+        <Heading color="white">Selamat Datang!</Heading>
+        <Text fontSize={20} color="white">{profile?.name}</Text>
       </Box>
       <Box flex={1} p={4}>
-        <Heading alignSelf={"center"} mt={10}>PILIH KATEGORI</Heading>
-        <HStack alignSelf={"center"} mt={10} space={4}>
-          <Pressable onPress={() => navigateToCategory("resmi")}>
+        <Heading alignSelf="center" mt={10}>PILIH KATEGORI</Heading>
+        <HStack alignSelf="center" mt={10} space={4}>
+          <Pressable onPress={() => navigation.navigate("TbResmi")}>
             {({ pressed }) => (
               <VStack alignItems="center">
                 <Image
                   source={require("../assets/resmi.png")}
-                  alt="Fisheesh Logo"
+                  alt="Kategori Resmi"
                   w={170}
                   h={120}
                   borderColor={pressed ? "gray.500" : "black"}
@@ -63,7 +65,7 @@ const Home = ({ navigation }) => {
               <VStack alignItems="center">
                 <Image
                   source={require("../assets/nonresmi.jpg")}
-                  alt="Fishe"
+                  alt="Kategori Non-Resmi"
                   w={170}
                   h={120}
                   borderColor={pressed ? "gray.500" : "black"}
