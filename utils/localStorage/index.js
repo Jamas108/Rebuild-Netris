@@ -1,5 +1,3 @@
-
-import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FIREBASE from '../../config/FIREBASE';
 
@@ -35,27 +33,6 @@ export const getData = async (key) => {
   }
 };
 
-
-// export const getData = async (key) => {
-//   try {
-//     const value = await AsyncStorage.getItem(key);
-//     if (value !== null) {
-//       // value previously stored
-//       return JSON.parse(value)
-//     }else{
-//       return 0;
-//     }
-//   } catch (e) {
-//     // error reading value
-//   }
-// };
-
-export const clearStorage = async () => {
-  try {
-    await AsyncStorage.removeItem('user');
-    // Clear other relevant data if needed
-  } catch (error) {
-    console.error('Error clearing storage:', error);
-  }
-};
-
+export const clearStorage = async() =>{
+  AsyncStorage.clear();
+}
