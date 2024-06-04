@@ -83,8 +83,8 @@ const Login = ({ navigation }) => {
                   <Text fontSize={15} color={"white"} fontWeight={"light"} shadow={"4"} bold>
                     Belum memiliki Akun?
                   </Text>
-                  <Pressable onPress={Register} ml={2} mt={-1}  bgColor={"white"} borderRadius={10}>
-                    <Text fontStyle={"italic"} w={20} mt={"1"} fontSize={16} color={"black"} fontWeight={"light"} alignItems={"center"} bold > Registrasi</Text>
+                  <Pressable onPress={Register} ml={2} mt={-1}  bgColor={"purple.600"} borderRadius={20}  borderColor={"white"} borderWidth={1}>
+                    <Text fontStyle={"italic"} w={20} ml={2} fontSize={16} color={"white"} fontWeight={"light"} alignItems={"center"} bold >Registrasi</Text>
                   </Pressable>
                 </HStack>
               </VStack>

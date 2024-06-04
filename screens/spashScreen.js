@@ -93,7 +93,7 @@ const SplashScreen = ({ navigation }) => {
                 fontSize: 18,
               }}
             >
-              Easy to use
+             Easy To Use
             </Text>
             <Separator h={10} />
             <View style={{ width: "75%" }}>
@@ -105,8 +105,8 @@ const SplashScreen = ({ navigation }) => {
                   fontFamily: "Inter_400Regular",
                 }}
               >
-                if a tire problem occurs, open your smartphone and find the
-                nearest tire repair shop
+                jika terjadi masalah ban, buka smartphone anda dan temukan
+                bengkel ban terdekat
               </Text>
             </View>
           </View>
@@ -124,7 +124,7 @@ const SplashScreen = ({ navigation }) => {
                 fontSize: 18,
               }}
             >
-              Easy to use
+              Quick Response
             </Text>
             <Separator h={10} />
             <View style={{ width: "75%" }}>
@@ -136,8 +136,7 @@ const SplashScreen = ({ navigation }) => {
                   fontFamily: "Inter_400Regular",
                 }}
               >
-                if a tire problem occurs, open your smartphone and find the
-                nearest tire repair shop
+                Respon Cepat akan segera menuju lokasi Anda dengan peralatan lengkap.
               </Text>
             </View>
           </View>
@@ -155,7 +154,7 @@ const SplashScreen = ({ navigation }) => {
                 fontSize: 18,
               }}
             >
-              Easy to use
+              Emergency Call
             </Text>
             <Separator h={10} />
             <View style={{ width: "75%" }}>
@@ -167,8 +166,7 @@ const SplashScreen = ({ navigation }) => {
                   fontFamily: "Inter_400Regular",
                 }}
               >
-                if a tire problem occurs, open your smartphone and find the
-                nearest tire repair shop
+                24/7 Layanan siap membantu kapan saja, di mana saja, tanpa henti!
               </Text>
             </View>
           </View>
@@ -198,7 +196,7 @@ const SplashScreen = ({ navigation }) => {
             }}
           >
             <Text style={{ color: "white", fontFamily: "Inter_400Regular" }}>
-              get started
+              Ayo Mulai!
             </Text>
           </View>
         </TouchableOpacity>
