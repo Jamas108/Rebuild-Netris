@@ -3,15 +3,12 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   Dimensions,
   Image,
 } from "react-native";
-import { TextInput } from "react-native-paper";
-import { Separator, Button, AuthTextInput, PwdInput } from "../components";
 import React, { useState, useEffect } from "react";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 
 const styles = StyleSheet.create({
@@ -19,11 +16,71 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
   },
+  map: {
+    width: "100%",
+    height: "100%",
+  },
+  zoomControls: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  zoomButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+    marginHorizontal: 5,
+    elevation: 5,
+  },
+  itemContainer: {
+    height: Dimensions.get("window").height * 0.22,
+    width: Dimensions.get("window").width * 0.8,
+    borderRadius: 10,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 2,
+    borderColor: "#A7A7A7",
+    marginHorizontal: 15,
+    marginVertical: 20,
+  },
+  selectedItem: {
+    backgroundColor: "#DCCDE5",
+  },
+  itemImage: {
+    width: "100%",
+    height: "100%",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  itemTextContainer: {
+    flex: 1.3,
+    paddingLeft: 10,
+    justifyContent: "center",
+  },
+  itemTitle: {
+    fontFamily: "Inter_700Bold",
+    fontSize: 16,
+    color: "#5A1781",
+  },
+  itemSubtitle: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 12,
+  },
 });
 
-const Nerby = ({ navigation }) => {
+const Nearby = ({ navigation }) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [chooseItem, setChooseItem] = useState(0);
+  const [region, setRegion] = useState({
+    latitude: -7.3385169,
+    longitude: 112.719163,
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1,
+  });
 
   useEffect(() => {
     const fetchCurrentLocation = async () => {
@@ -36,15 +93,17 @@ const Nerby = ({ navigation }) => {
 
         const location = await Location.getCurrentPositionAsync({});
         setCurrentLocation(location.coords);
+        setRegion((prevRegion) => ({
+          ...prevRegion,
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        }));
       } catch (error) {
         setError("Error getting user location: " + error);
       }
     };
     fetchCurrentLocation();
-  });
-
-  const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
+  }, []);
 
   const listTambalBan = [
     {
@@ -91,83 +150,75 @@ const Nerby = ({ navigation }) => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => {
-          setChooseItem(item.id);
-        }}
-        style={{
-          height: windowHeight * 0.22,
-          width: windowWidth * 0.8,
-          borderRadius: 10,
-          backgroundColor: index === chooseItem ? "#DCCDE5" : "#FFFFFF",
-          borderWidth: 2,
-          borderColor: "#A7A7A7",
-          marginHorizontal: 15,
-          marginVertical: 20,
-        }}
+        onPress={() => setChooseItem(item.id)}
+        style={[
+          styles.itemContainer,
+          item.id === chooseItem && styles.selectedItem,
+        ]}
       >
         <View style={{ flex: 1 }}>
           <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
-            }}
+            style={styles.itemImage}
             source={require("../assets/tambalBan.jpg")}
           />
         </View>
-        <View style={{ flex: 1.3, paddingLeft: 10, justifyContent: "center" }}>
-          <Text
-            style={{
-              fontFamily: "Inter_700Bold",
-              fontSize: 16,
-              color: "#5A1781",
-            }}
-          >
-            {item.nama}
-          </Text>
-          <Separator h={3} />
-          <Text
-            style={{
-              fontFamily: "Inter_400Regular",
-              fontSize: 12,
-              // color: "#774494",
-            }}
-          >
-            {item.tipe}
-          </Text>
-          <Separator h={3} />
-          <Text
-            style={{
-              fontFamily: "Inter_400Regular",
-              fontSize: 12,
-              // color: "#774494",
-            }}
-          >
-            {item.alamat}
-          </Text>
+        <View style={styles.itemTextContainer}>
+          <Text style={styles.itemTitle}>{item.nama}</Text>
+          <Text style={styles.itemSubtitle}>{item.tipe}</Text>
+          <Text style={styles.itemSubtitle}>{item.alamat}</Text>
         </View>
       </TouchableOpacity>
     );
+  };
+
+  const handleZoomIn = () => {
+    setRegion((prevRegion) => ({
+      ...prevRegion,
+      latitudeDelta: prevRegion.latitudeDelta / 2,
+      longitudeDelta: prevRegion.longitudeDelta / 2,
+    }));
+  };
+
+  const handleZoomOut = () => {
+    setRegion((prevRegion) => ({
+      ...prevRegion,
+      latitudeDelta: prevRegion.latitudeDelta * 2,
+      longitudeDelta: prevRegion.longitudeDelta * 2,
+    }));
   };
 
   return (
     <View style={styles.container}>
       <View style={{ flex: 3 }}>
         <MapView
+          provider={PROVIDER_GOOGLE}
           showsUserLocation={true}
           showsCompass={true}
-          initialRegion={{
-            latitude: parseFloat(-7.3385169),
-            longitude: parseFloat(112.719163),
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1,
-          }}
-          style={{ width: "100%", height: "100%" }}
-        ></MapView>
+          region={region}
+          onRegionChangeComplete={(region) => setRegion(region)}
+          style={styles.map}
+        >
+          {currentLocation && (
+            <Marker
+              coordinate={{
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+              }}
+              title="My Location"
+            />
+          )}
+        </MapView>
+        <View style={styles.zoomControls}>
+          <TouchableOpacity style={styles.zoomButton} onPress={handleZoomIn}>
+            <Text style={{ fontSize: 18 }}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.zoomButton} onPress={handleZoomOut}>
+            <Text style={{ fontSize: 18 }}>-</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}
@@ -175,7 +226,7 @@ const Nerby = ({ navigation }) => {
         <FlatList
           data={listTambalBan}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         />
@@ -184,4 +235,4 @@ const Nerby = ({ navigation }) => {
   );
 };
 
-export default Nerby;
+export default Nearby;
