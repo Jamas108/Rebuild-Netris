@@ -167,6 +167,7 @@ const EditProfile = ({ navigation }) => {
               alignSelf={"flex-end"}
               w="40%"
               bgColor="purple.500"
+              bgColor="red.500"
               h={"12%"}
               mt={16}
               shadow={0}
