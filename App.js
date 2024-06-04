@@ -14,6 +14,7 @@ import {
   Home,
   Profile,
   Splash,
+  EditProfile,
 } from "./screens";
 import {
   Inter_400Regular,
@@ -167,6 +168,8 @@ export default function App() {
           <Stack.Screen name={"Register"} component={Register} />
           {/* <Stack.Screen name={"Nerby"} component={Nerby} /> */}
           <Stack.Screen name={"HomeTab"} component={TabList} />
+          <Stack.Screen name={"EditProfile"} component={EditProfile} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

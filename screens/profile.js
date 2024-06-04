@@ -126,7 +126,7 @@ const Profile = ({ navigation }) => {
                     {/* Edit Profile */}
                     <Box w={"100%"} bg={"purple.600"} h={"75"} mt={"5"}
                         shadow={"9"} mb={"0"} borderColor={"white"} borderWidth={"1"} borderRadius={10}>
-                        <Pressable onPress={() => navigation.navigate("edit-profile")} >
+                        <Pressable onPress={() => navigation.navigate("EditProfile")} >
 
                             <Box w={"100%"} h={"100%"} mt={"0"}>
                                 <Heading ml={2} mt={5} fontSize={20} fontWeight={"bold"} color={"white"} alignSelf={"center"} >
