@@ -166,6 +166,7 @@ const EditProfile = ({ navigation }) => {
             <Box
               alignSelf={"flex-end"}
               w="40%"
+              bgColor="purple.500"
               bgColor="red.500"
               h={"12%"}
               mt={16}
