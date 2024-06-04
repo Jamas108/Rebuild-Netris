@@ -63,12 +63,11 @@ const EditProfile = ({ navigation }) => {
     <>
       <Header title={"Kembali"} withBack={true} />
       <ScrollView>
-        <StatusBar backgroundColor="#ffffff" />
         <Box mt={4} padding={4}>
           {/* Profile Icon and Title */}
           <Box alignItems="center">
             <Ionicons name="person-circle-outline" color="purple.400" size={100} />
-            <Heading mt={2} fontSize={24} fontWeight="bold" color="purple.400">
+            <Heading mt={2} fontSize={24} fontWeight="bold" color="black">
               Edit Profile
             </Heading>
           </Box>
@@ -80,7 +79,7 @@ const EditProfile = ({ navigation }) => {
                 {field.charAt(0).toUpperCase() + field.slice(1)}
               </Text>
               <Input
-                borderWidth={1}
+                borderWidth={2}
                 borderColor="gray.300"
                 borderRadius={8}
                 fontSize={16}

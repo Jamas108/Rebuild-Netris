@@ -6,6 +6,7 @@ import Home from "./home";
 import Profile from "./profile";
 import Splash from "./splash";
 import EditProfile from "./edit-profile";
-import TbResmi from "./tbresmi";
+import Tbresmi from "./tbresmi";
+import Tbnonresmi from "./tbnonresmi";
 
-export { SplashScreen, Login, Register, Nerby, Home, Profile, Splash, EditProfile,TbResmi, };
+export { SplashScreen, Login, Register, Nerby, Home, Profile, Splash, EditProfile,Tbresmi,Tbnonresmi };

@@ -10,8 +10,8 @@ const Header = React.memo(({ title, withBack = false }) => {
 
   return (
     <SafeAreaView edges={['right', 'left', 'top']}>
-      <StatusBar barStyle="auto" backgroundColor="white" />
-      <Box bgColor={"purple.400"} p={2}>
+      <StatusBar barStyle="auto" backgroundColor="#774494" />
+      <Box bgColor={"#774494"} p={2}>
         <HStack justifyContent="space-between" alignContent="center">
           <HStack alignContent="center">
             {!withBack ? (
@@ -28,11 +28,11 @@ const Header = React.memo(({ title, withBack = false }) => {
                 onPress={() => navigation.goBack()}
               >
                 <Box mr={3}>
-                  <Ionicons name="arrow-back-outline" size={34} color="black" />
+                  <Ionicons name="arrow-back-outline" size={34} color="white" />
                 </Box>
               </Pressable>
             )}
-            <Heading mt={1} color="black">{title}</Heading>
+            <Heading fontSize={22} mt={1} color="white">{title}</Heading>
           </HStack>
         </HStack>
       </Box>
