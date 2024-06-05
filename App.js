@@ -10,13 +10,14 @@ import {
   SplashScreen,
   Login,
   Register,
-  Nerby,
+  Article,
   Home,
   Profile,
   Splash,
   EditProfile,
   Tbresmi,
   Tbnonresmi,
+  ArticleDetail,
 } from "./screens";
 import {
   Inter_400Regular,
@@ -53,8 +54,8 @@ const TabList = () => {
                 color={color}
               />
             );
-          } else if (rn == "Nerby") {
-            iconName = focused ? "map-marker" : "map-marker-outline";
+          } else if (rn == "Article") {
+            iconName = focused ? "file-document" : "file-document-outline";
             return (
               <CustomTabIcon
                 name={iconName}
@@ -109,8 +110,8 @@ const TabList = () => {
         }}
       />
       <Tab.Screen
-        name={"Nerby"}
-        component={Nerby}
+        name={"Article"}
+        component={Article}
         options={{
           tabBarShowLabel: false,
         }}
@@ -173,6 +174,7 @@ export default function App() {
           <Stack.Screen name={"EditProfile"} component={EditProfile} />
           <Stack.Screen name={"Tbnonresmi"} component={Tbnonresmi} />
           <Stack.Screen name={"Tbresmi"} component={Tbresmi} />
+          <Stack.Screen name={"ArticleDetail"} component={ArticleDetail} />
 
         </Stack.Navigator>
       </NavigationContainer>
