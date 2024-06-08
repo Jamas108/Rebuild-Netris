@@ -11,16 +11,17 @@ const Header = React.memo(({ title, withBack = false }) => {
   return (
     <SafeAreaView edges={['right', 'left', 'top']}>
       <StatusBar barStyle="auto" backgroundColor="#774494" />
-      <Box bgColor={"#774494"} p={2}>
+      <Box bgColor={"#774494"} p={2} h={16}>
         <HStack justifyContent="space-between" alignContent="center">
           <HStack alignContent="center">
             {!withBack ? (
               <Image
                 source={require('../assets/slide3.png')}
-                w={12}
-                h={12}
+                w={"22%"}
+                h={10}
                 alt="Logo"
-                mr={3}
+                mr={2}
+                mt={2}
               />
             ) : (
               <Pressable
@@ -32,7 +33,7 @@ const Header = React.memo(({ title, withBack = false }) => {
                 </Box>
               </Pressable>
             )}
-            <Heading fontSize={22} mt={1} color="white">{title}</Heading>
+            <Heading fontSize={22} mt={3} color="white">{title}</Heading>
           </HStack>
         </HStack>
       </Box>
