@@ -1,9 +1,17 @@
-FROM node:13.12.0-alpine
+# Gunakan image node sebagai dasar
+FROM node:14
+
+# Tentukan direktori kerja di dalam container
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
-COPY . ./
+
+# Salin file package.json dan package-lock.json
+COPY package*.json ./
+
+# Install dependensi
+RUN npm install
+
+# Salin seluruh kode aplikasi ke dalam direktori kerja
+COPY . .
+
+# Jalankan aplikasi
 CMD ["npm", "start"]
