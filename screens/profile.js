@@ -55,6 +55,7 @@ const Profile = ({ navigation }) => {
   return (
     <>
       <StatusBar barStyle="auto" backgroundColor="#774494" />
+      <Header title={"Profile"} withBack={false} />
       <ScrollView>
         <Box alignSelf="center" w="90%" bgColor="purple.700" p={5} mt={5} mb={20} borderRadius={10} shadow={9}>
           <Box alignItems="center">
