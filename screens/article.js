@@ -68,7 +68,7 @@ const Article = ({ navigation }) => {
         shadow="3"
         overflow="hidden"
       >
-        <Image style={{ width: "100%", height: 170 }} source={item.image} />
+        <Image style={{ width: "100%", height: 380 }} source={item.image} />
         <Box p="5">
           <Text fontSize="lg" color="#5A1781" bold>{item.title}</Text>
           <Text fontSize="md" mt="2" color="gray.600">{truncateText(item.description, 80)}</Text>

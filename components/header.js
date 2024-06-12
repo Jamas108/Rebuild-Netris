@@ -17,7 +17,7 @@ const Header = React.memo(({ title, withBack = false }) => {
             {!withBack ? (
               <Image
                 source={require('../assets/slide3.png')}
-                w={"22%"}
+                w={"24%"}
                 h={10}
                 alt="Logo"
                 mr={2}
@@ -28,8 +28,8 @@ const Header = React.memo(({ title, withBack = false }) => {
                 activeOpacity={0.5}
                 onPress={() => navigation.goBack()}
               >
-                <Box mr={3}>
-                  <Ionicons name="arrow-back-outline" size={34} color="white" />
+                <Box mr={3} mt={1}>
+                  <Ionicons name="arrow-back-outline" size={34}  color="white" />
                 </Box>
               </Pressable>
             )}
