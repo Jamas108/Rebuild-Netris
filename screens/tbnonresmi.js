@@ -115,6 +115,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3300,
       longitude: 112.7300,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 1,
@@ -123,6 +124,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3320,
       longitude: 112.7320,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 2,
@@ -131,6 +133,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3340,
       longitude: 112.7340,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 3,
@@ -139,6 +142,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3360,
       longitude: 112.7360,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 4,
@@ -147,6 +151,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3380,
       longitude: 112.7380,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 5,
@@ -155,6 +160,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3400,
       longitude: 112.7400,
+      image: require("../assets/tambalBan.jpg"),
     },
     {
       id: 6,
@@ -163,6 +169,7 @@ const Tbnonresmi = ({ navigation }) => {
       alamat: "Jl bareng cuma temen",
       latitude: -7.3420,
       longitude: 112.7420,
+      image: require("../assets/tambalBan.jpg"),
     },
   ];
 
@@ -190,12 +197,9 @@ const Tbnonresmi = ({ navigation }) => {
       ]}
     >
       <View style={{ flex: 1 }}>
-        <Image
-          style={styles.itemImage}
-          source={require("../assets/tambalBan.jpg")}
-        />
+        <Image style={styles.itemImage} source={item.image} />
       </View>
-      <View style={styles.itemTextContainer} >
+      <View style={styles.itemTextContainer}>
         <Text style={styles.itemTitle}>{item.nama}</Text>
         <Text style={styles.itemSubtitle}>{item.tipe}</Text>
         <Text style={styles.itemSubtitle}>{item.alamat}</Text>
@@ -237,7 +241,7 @@ const Tbnonresmi = ({ navigation }) => {
 
   return (
     <>
-      <Header title={"Tambal Ban Non Resmi"} withBack={true} />
+      <Header title={"Tambal Ban Resmi"} withBack={true} />
       <View style={styles.container}>
         <View style={{ flex: 3 }}>
           <MapView
@@ -245,7 +249,6 @@ const Tbnonresmi = ({ navigation }) => {
             showsUserLocation={true}
             showsCompass={true}
             region={region}
-            onRegionChangeComplete={(region) => setRegion(region)}
             style={styles.map}
           >
             {currentLocation && (

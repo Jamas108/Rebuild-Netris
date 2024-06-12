@@ -73,23 +73,20 @@ const EditProfile = ({ navigation }) => {
           </Box>
 
           {/* Editable Fields */}
-          {["name", "email"].map((field) => (
-            <Box key={field} mt={6}>
-              <Text fontWeight="bold" fontSize={18} color="gray.600" mb={2}>
-                {field.charAt(0).toUpperCase() + field.slice(1)}
-              </Text>
-              <Input
-                borderWidth={2}
-                borderColor="gray.300"
-                borderRadius={8}
-                fontSize={16}
-                value={profile?.[field]}
-                onChangeText={(value) => handleInputChange(field, value)}
-              />
-            </Box>
-          ))}
+          <Box key="name" mt={6}>
+            <Text fontWeight="bold" fontSize={18} color="gray.600" mb={2}>
+              Nama
+            </Text>
+            <Input
+              borderWidth={2}
+              borderColor="gray.300"
+              borderRadius={8}
+              fontSize={16}
+              value={profile?.name}
+              onChangeText={(value) => handleInputChange("name", value)}
+            />
+          </Box>
 
-          {/* Save Button */}
           <Box alignItems="center" mt={10}>
             <Pressable onPress={onSubmit} w="50%">
               <Box
@@ -99,7 +96,7 @@ const EditProfile = ({ navigation }) => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Text fontSize={18} fontWeight="bold" color="black">
+                <Text fontSize={18} fontWeight="bold" color="white">
                   Save
                 </Text>
               </Box>

@@ -7,7 +7,6 @@ import { Header } from "../components";
 
 const imagesSlideshow1 = [
   require('../assets/baner3.png'),
-  require('../assets/baner2.png'),
   require('../assets/baner1.png'),
   // tambahkan gambar lainnya di sini
 ];
@@ -39,10 +38,12 @@ const Home = ({ navigation }) => {
   }, [navigation]);
 
   const navigateToCategory = (category) => {
-    navigation.navigate("Tbnonresmi", { category });
-    navigation.navigate("Tbresmi", { category });
+    if (category === "Tbnonresmi") {
+      navigation.navigate("Tbnonresmi", { category });
+    } else if (category === "Tbresmi") {
+      navigation.navigate("Tbresmi", { category });
+    }
   };
-
   return (
     <>
       <StatusBar barStyle="auto" backgroundColor="#774494" />
@@ -52,39 +53,40 @@ const Home = ({ navigation }) => {
           <Text fontSize={20} color="white">{profile?.name}</Text>
         </Box>
         <Box justifyContent="center" alignItems="center" my={5} mx={3} bg={"transparent"} borderColor={"#774494"} borderWidth={3} borderRadius={10}>
-          <ScrollView borderRadius={"20"} horizontal pagingEnabled w={"100%"} h={250}>
+          <ScrollView borderRadius={"20"} horizontal pagingEnabled w={"100%"} h={150}>
             {imagesSlideshow1.map((image, index) => (
               <Image
                 key={index}
                 source={image}
                 alt={`Slide ${index}`}
-                style={{ width: 390, height: 250 }} // Menggunakan style untuk mengatur ukuran gambar
+                style={{ width: 330, height: 150 }} // Menggunakan style untuk mengatur ukuran gambar
               />
             ))}
           </ScrollView>
         </Box>
         <Box flex={1} p={4} borderRadius={10}>
           <Heading>KATEGORI</Heading>
-          <HStack alignSelf="center" mt={3} space={9}>
-            <Pressable onPress={() => navigation.navigate("Tbresmi")}>
+          <HStack mt={3} space={9}>
+            <Pressable onPress={() => navigateToCategory("Tbresmi")}>
               {({ pressed }) => (
                 <VStack alignItems="center">
                   <Image
-                    source={require("../assets/resmi.png")}
+                    source={require("../assets/img2.jpg")}
                     alt="Kategori Resmi"
-                    style={{ width: 170, height: 120, borderColor: pressed ? "gray.500" : "#774494", borderWidth: 3, borderRadius: 10 }}
+                    style={{ width: 150, height: 120, borderColor: pressed ? "gray.500" : "#774494", borderWidth: 3, borderRadius: 10 }}
                   />
                   <Text bold mt={2}>Tambal Ban Resmi</Text>
                 </VStack>
               )}
             </Pressable>
-            <Pressable onPress={() => navigateToCategory("Tbnonresmi")}>
+
+            <Pressable onPress={() => navigateToCategory("Tbnonresmi")} >
               {({ pressed }) => (
                 <VStack alignItems="center">
                   <Image
                     source={require("../assets/nonresmi.jpg")}
                     alt="Kategori Non-Resmi"
-                    style={{ width: 170, height: 120, borderColor: pressed ? "gray.500" : "#774494", borderWidth: 3, borderRadius: 10 }}
+                    style={{ width: 150, height: 120, borderColor: pressed ? "gray.500" : "#774494", borderWidth: 3, borderRadius: 10, }}
                   />
                   <Text bold mt={2}>Tambal Ban Non-Resmi</Text>
                 </VStack>
@@ -92,14 +94,10 @@ const Home = ({ navigation }) => {
             </Pressable>
           </HStack>
         </Box>
-        <Box alignSelf={"center"} w={"90%"} h={180} bg={"white"} borderRadius={10} borderWidth={3} borderColor={"#774494"} mt={5 }>
-          <Image source={require("../assets/poster1.png")} style={{ width: "100%", height: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} alt="poster1" />
-          <Text ml={3} mt={3}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+        <Box alignSelf={"center"} w={"90%"} h={166} bg={"white"} borderRadius={10} borderWidth={3} borderColor={"#774494"} mt={5}>
+          <Image source={require("../assets/baner2.png")} style={{ width: "100%", height: 160, borderRadius:6 }} alt="poster1" />
         </Box>
-        <Box alignSelf={"center"} w={"90%"} h={180} bg={"white"} borderRadius={10} borderWidth={3} borderColor={"#774494"} mt={10}>
-          <Image source={require("../assets/poster1.png")} style={{ width: "100%", height: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} alt="poster1" />
-          <Text ml={3} mt={3}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
-        </Box>
+        <Text my={5} alignSelf={"center"}>Powered by Netris Development </Text>
       </ScrollView>
     </>
   );

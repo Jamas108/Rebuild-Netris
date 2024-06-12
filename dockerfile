@@ -1,5 +1,5 @@
 # Gunakan image node sebagai dasar
-FROM node:14
+FROM node:18
 
 # Tentukan direktori kerja di dalam container
 WORKDIR /app
@@ -13,5 +13,5 @@ RUN npm install
 # Salin seluruh kode aplikasi ke dalam direktori kerja
 COPY . .
 
-# Jalankan aplikasi
-CMD ["npm", "start"]
+# Jalankan Metro Bundler
+CMD ["npx", "react-native", "start"]
