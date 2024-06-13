@@ -241,7 +241,7 @@ const Tbnonresmi = ({ navigation }) => {
 
   return (
     <>
-      <Header title={"Tambal Ban Resmi"} withBack={true} />
+      <Header title={"Tambal Ban Non Resmi"} withBack={true} />
       <View style={styles.container}>
         <View style={{ flex: 3 }}>
           <MapView
