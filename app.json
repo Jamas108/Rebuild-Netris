@@ -4,7 +4,7 @@
     "slug": "NetrisApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/splashh.png",
     "userInterfaceStyle": "light",
     "androidStatusBar": {
       "backgroundColor": "#774495",
@@ -24,17 +24,23 @@
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/splashh.png",
         "backgroundColor": "#ffffff"
       },
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyA47i_0RjaPDgL631WIAGA9QcRzWMQfhCo"
         }
-      }
+      },
+      "package": "com.jamas10.NetrisApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2e1b94a4-94cb-4440-8635-c48c9f286ea5"
+      }
     }
   }
 }

@@ -13,4 +13,4 @@ import ArticleDetail from "./article-detail";
 
 
 
-export { SplashScreen, Login, Register, Nerby, Home, Profile, Splash, EditProfile,Tbresmi,Tbnonresmi, Article, ArticleDetail };
+export { SplashScreen, Login, Register, Nerby, Home, Profile, Splash, EditProfile,Tbresmi,Tbnonresmi, Article, ArticleDetail};

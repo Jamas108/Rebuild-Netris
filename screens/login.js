@@ -39,11 +39,10 @@ const Login = ({ navigation }) => {
         <StatusBar barStyle="dark-content" />
         <Box alignItems={"flex-end"} w={"container"} mr={8} mt={0} h={"container"}>
           <Box alignItems="center" mb={1} mt={12}>
-            <Image source={require("../assets/netris-logo.png")} w={180} h={12} alt="image1" />
           </Box>
         </Box>
         <Box>
-          <Heading fontSize={"3xl"} ml={"8"} mt={-11} color={"purple.900"} alignSelf={"flex-start"}>
+          <Heading fontSize={"3xl"} mt={-11} color={"purple.900"} alignSelf={"center"} >
             LOGIN
           </Heading>
         </Box>

@@ -8,7 +8,6 @@ import { Header } from "../components";
 const imagesSlideshow1 = [
   require('../assets/baner3.png'),
   require('../assets/baner1.png'),
-  // tambahkan gambar lainnya di sini
 ];
 
 const Home = ({ navigation }) => {
